@@ -3,16 +3,16 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/index.js';
 import Layout from './Layout/Layout.jsx';
-import LogIn from './pages/LogIn';
-import SignUp from './pages/SignUp';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Shop from './pages/Shop';
-import Cart from './pages/Cart';
-import Wishlist from './pages/Wishlist';
-import LastPage from './pages/LastPage';
-import ProtectedRoute from './components/ProtectedRoute';
+import LogIn from './pages/logIn.jsx';
+import SignUp from './pages/signUp.jsx';
+import Home from './pages/home.jsx';
+import About from './pages/about.jsx';
+import Contact from './pages/contact.jsx';
+import Shop from './pages/shop.jsx';
+import Cart from './pages/cart.jsx';
+import Wishlist from './pages/wishlist.jsx';
+import LastPage from './pages/lastPage.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 const App = () => {
   const router = createBrowserRouter([
