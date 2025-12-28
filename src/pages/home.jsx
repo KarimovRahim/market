@@ -8,7 +8,7 @@ import { SiApple } from 'react-icons/si';
 import CountdownTimer from '../components/CountDownTimer.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
 import MusicExperienceSwiper from '../components/MusicExperienceSwiper';
-import { products } from '../components/productsData';
+import { products } from '../components/ProductsData.jsx';
 
 import img1 from '../assets/img1.jpg'
 import phones from '../assets/phone.png';
