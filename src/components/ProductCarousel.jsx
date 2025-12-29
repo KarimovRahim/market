@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { products } from './productsData';
+import { products } from './ProductsData';
 
 const ProductCarousel = () => {
   return (
