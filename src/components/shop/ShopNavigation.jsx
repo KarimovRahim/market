@@ -10,22 +10,24 @@ const ShopNavigation = () => {
           <FaHome className="text-xl" />
           <span className="text-xs mt-1">Home</span>
         </Link>
-        
+
         <Link to="/Wishlist" className="flex flex-col items-center text-gray-600 hover:text-pink-600">
           <FaHeart className="text-xl" />
           <span className="text-xs mt-1">Wishlist</span>
         </Link>
-        
+
         <Link to="/Cart" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
           <div className="relative">
             <FaShoppingCart className="text-xl" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-              3
-            </span>
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartItems.length}
+              </span>
+            )}
           </div>
           <span className="text-xs mt-1">Cart</span>
         </Link>
-        
+
         <Link to="/Profile" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
           <FaUser className="text-xl" />
           <span className="text-xs mt-1">Profile</span>

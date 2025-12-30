@@ -12,6 +12,7 @@ import Shop from './pages/shop.jsx';
 import Cart from './pages/cart.jsx';
 import Wishlist from './pages/wishlist.jsx';
 import LastPage from './pages/lastPage.jsx';
+import Profile from './pages/Profile.jsx';
 import PhoneVerification from './pages/PhoneVerification.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 
@@ -24,6 +25,10 @@ const App = () => {
         {
           index: true,
           element: <LogIn />,
+        },
+        {
+          path: "verify-phone",
+          element: <PhoneVerification />,
         },
         {
           path: "Log_in",
@@ -90,8 +95,12 @@ const App = () => {
           )
         },
         {
-          path: "verify-phone",
-          element: <PhoneVerification />,
+          path: "Profile",
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
         }
       ]
     }
