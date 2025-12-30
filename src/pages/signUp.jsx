@@ -31,52 +31,30 @@ const SignUp = () => {
     if (error) dispatch(clearError());
   };
 
-  const validateForm = () => {
-    if (!formData.name.trim()) {
-      alert('Please enter your name');
-      return false;
-    }
-    
-    if (!formData.phone.trim()) {
-      alert('Please enter your phone number');
-      return false;
-    }
-    
-    if (!formData.password) {
-      alert('Please enter password');
-      return false;
-    }
-    
-    if (formData.password.length < 6) {
-      alert('Password must be at least 6 characters');
-      return false;
-    }
-    
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
-      return false;
-    }
-    
-    return true;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!validateForm()) return;
 
     try {
+      // Просто отправляем данные как есть, без валидации
       const result = await dispatch(registerUser({
         phone: formData.phone,
         password: formData.password,
+        confirmPassword: formData.confirmPassword,
         name: formData.name,
       })).unwrap();
       
       console.log('Registration successful:', result);
-      navigate('/Home');
+      
+      // Переходим на страницу подтверждения телефона
+      navigate('/verify-phone', { 
+        state: { 
+          phoneNumber: formData.phone 
+        } 
+      });
+      
     } catch (error) {
       console.error('Registration failed:', error);
-      // Error already shown by Redux
+      // Error уже показывается через Redux
     }
   };
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/index.js';
 import Layout from './Layout/Layout.jsx';
@@ -12,6 +12,7 @@ import Shop from './pages/shop.jsx';
 import Cart from './pages/cart.jsx';
 import Wishlist from './pages/wishlist.jsx';
 import LastPage from './pages/lastPage.jsx';
+import PhoneVerification from './pages/PhoneVerification.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 const App = () => {
@@ -87,11 +88,15 @@ const App = () => {
               <LastPage />
             </ProtectedRoute>
           )
+        },
+        {
+          path: "verify-phone",
+          element: <PhoneVerification />,
         }
       ]
     }
   ])
-  
+
   return (
     <Provider store={store}>
       <div className="w-full m-auto flex flex-col">

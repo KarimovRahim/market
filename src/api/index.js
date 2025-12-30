@@ -8,33 +8,56 @@ const userID = getUserId();
 
 console.log('Current user ID:', userID);
 
-// ✅ Регистрация пользователя
+
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (userData, { rejectWithValue }) => {
     try {
       console.log('Registering user:', userData);
 
-      const response = await axiosRequest.post('AuthByPhone/registerPhone', {
-        phone: userData.phone,
+      const requestData = {
+        phoneNumber: userData.phone,
         password: userData.password,
-        ...(userData.name && { name: userData.name }),
-      });
+        confirmPassword: userData.confirmPassword,
+        login: userData.name,
+        isPersonalDataAccepted: true
+      };
+
+      console.log('Sending to server:', requestData);
+
+      const response = await axiosRequest.post('AuthByPhone/registerPhone', requestData);
 
       console.log('Registration response:', response.data);
 
-      // Сохраняем токен
-      saveRegistToken(response.data);
+      // Сохраняем phoneNumber для верификации
+      localStorage.setItem('pendingVerificationPhone', userData.phone);
 
-      return response.data;
+      return { ...response.data, phoneNumber: userData.phone };
+
     } catch (error) {
       console.error('Registration error:', error);
-      return rejectWithValue(
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.message ||
-        'Registration failed'
-      );
+
+      console.log('===== REGISTRATION ERROR START =====');
+      console.log('Error:', error);
+      console.log('Status:', error.response?.status);
+      console.log('Response data:', error.response?.data);
+      console.log('Request data sent:', error.config?.data);
+      console.log('===== REGISTRATION ERROR END =====');
+
+      const serverData = error.response?.data;
+
+      let errorMessage = 'Registration failed';
+
+      if (serverData?.errors) {
+        const firstKey = Object.keys(serverData.errors)[0];
+        errorMessage = serverData.errors[firstKey][0];
+      } else if (serverData?.message) {
+        errorMessage = serverData.message;
+      } else if (serverData?.error) {
+        errorMessage = serverData.error;
+      }
+
+      return rejectWithValue(errorMessage);
     }
   }
 );
