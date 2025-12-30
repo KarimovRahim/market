@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, clearError } from '../store/authSlice';
+import { loginUser } from '../api';
+import { clearError } from '../store/authSlice';
 
 const LogIn = () => {
   const dispatch = useDispatch();
