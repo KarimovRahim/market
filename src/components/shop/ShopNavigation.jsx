@@ -1,22 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaShoppingCart, FaHeart, FaUser } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 const ShopNavigation = () => {
+  // Получаем cartItems из Redux store или используем пустой массив по умолчанию
+  const cartItems = useSelector((state) => state.cart?.items || []);
+  
+  // Альтернативно, если у вас нет Redux для корзины:
+  // const [cartCount, setCartCount] = React.useState(0);
+  // React.useEffect(() => {
+  //   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  //   setCartCount(cart.length);
+  // }, []);
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-4 z-50 md:hidden">
       <div className="flex justify-around items-center">
-        <Link to="/Home" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <Link 
+          to="/Home" 
+          className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors"
+        >
           <FaHome className="text-xl" />
           <span className="text-xs mt-1">Home</span>
         </Link>
 
-        <Link to="/Wishlist" className="flex flex-col items-center text-gray-600 hover:text-pink-600">
+        <Link 
+          to="/Wishlist" 
+          className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors"
+        >
           <FaHeart className="text-xl" />
           <span className="text-xs mt-1">Wishlist</span>
         </Link>
 
-        <Link to="/Cart" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <Link 
+          to="/Cart" 
+          className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors"
+        >
           <div className="relative">
             <FaShoppingCart className="text-xl" />
             {cartItems.length > 0 && (
@@ -28,7 +48,10 @@ const ShopNavigation = () => {
           <span className="text-xs mt-1">Cart</span>
         </Link>
 
-        <Link to="/Profile" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <Link 
+          to="/Profile" 
+          className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors"
+        >
           <FaUser className="text-xl" />
           <span className="text-xs mt-1">Profile</span>
         </Link>
