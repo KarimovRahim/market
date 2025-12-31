@@ -7,7 +7,6 @@ const userID = getUserId();
 
 console.log('Current user ID:', userID);
 
-
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (userData, { rejectWithValue }) => {
@@ -45,6 +44,97 @@ export const registerUser = createAsyncThunk(
       const serverData = error.response?.data;
 
       let errorMessage = 'Registration failed';
+
+      if (serverData?.errors) {
+        const firstKey = Object.keys(serverData.errors)[0];
+        errorMessage = serverData.errors[firstKey][0];
+      } else if (serverData?.message) {
+        errorMessage = serverData.message;
+      } else if (serverData?.error) {
+        errorMessage = serverData.error;
+      }
+
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const confirmPhone = createAsyncThunk(
+  'auth/confirmPhone',
+  async (confirmData, { rejectWithValue }) => {
+    try {
+      console.log('Confirming phone:', confirmData);
+
+      console.log('➡️ CONFIRM PHONE — sending to backend:', {
+        phoneNumber: confirmData.phoneNumber,
+        code: confirmData.code,
+      });
+
+      const response = await axiosRequest.post('AuthByPhone/confirmPhone', {
+        "phoneNumber": confirmData.phoneNumber,
+        "code": confirmData.code
+      });
+
+      console.log('Confirmation response:', response.data);
+      
+      // Сохраняем токен после подтверждения
+      if (response.data?.accessToken) {
+        saveToken(response.data);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('Confirmation error:', error);
+      
+      console.log('===== CONFIRMATION ERROR START =====');
+      console.log('Error:', error);
+      console.log('Status:', error.response?.status);
+      console.log('Response data:', error.response?.data);
+      console.log('Request data sent:', error.config?.data);
+      console.log('===== CONFIRMATION ERROR END =====');
+
+      const serverData = error.response?.data;
+
+      let errorMessage = 'Invalid verification code';
+
+      if (serverData?.errors) {
+        const firstKey = Object.keys(serverData.errors)[0];
+        errorMessage = serverData.errors[firstKey][0];
+      } else if (serverData?.message) {
+        errorMessage = serverData.message;
+      } else if (serverData?.error) {
+        errorMessage = serverData.error;
+      }
+
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const resendVerificationCode = createAsyncThunk(
+  'auth/resendCode',
+  async (phoneNumber, { rejectWithValue }) => {
+    try {
+      console.log('Resending code to:', phoneNumber);
+
+      const response = await axiosRequest.post('AuthByPhone/registerPhone', {
+        phoneNumber: phoneNumber
+      });
+
+      console.log('Resend response:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Resend error:', error);
+      
+      console.log('===== RESEND ERROR START =====');
+      console.log('Error:', error);
+      console.log('Status:', error.response?.status);
+      console.log('Response data:', error.response?.data);
+      console.log('===== RESEND ERROR END =====');
+
+      const serverData = error.response?.data;
+
+      let errorMessage = 'Failed to resend code';
 
       if (serverData?.errors) {
         const firstKey = Object.keys(serverData.errors)[0];

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { axiosRequest } from '../utils/axiosConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import { confirmPhone, resendVerificationCode } from '../api';
 
 const PhoneVerification = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const phoneNumber = location.state?.phoneNumber || '';
+  const dispatch = useDispatch();
   
-  const [code, setCode] = useState(['', '', '', '', '', '']);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const phoneNumber = location.state?.phoneNumber || '';
+  const { isLoading, error } = useSelector((state) => state.auth);
+  
+  const [code, setCode] = useState(['', '', '', '', '']);
   const [success, setSuccess] = useState(false);
   const [timer, setTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
+  const [localError, setLocalError] = useState('');
 
   React.useEffect(() => {
     if (timer > 0 && !canResend) {
@@ -30,9 +33,8 @@ const PhoneVerification = () => {
       const newCode = [...code];
       newCode[index] = value;
       setCode(newCode);
-      
-      // Автоматический переход к следующему полю
-      if (value && index < 5) {
+
+      if (value && index < 4) {
         document.getElementById(`code-${index + 1}`).focus();
       }
     }
@@ -46,58 +48,43 @@ const PhoneVerification = () => {
 
   const handleVerify = async () => {
     const verificationCode = code.join('');
-    
-    if (verificationCode.length !== 6) {
-      setError('Please enter all 6 digits');
+
+    if (verificationCode.length !== 5) {
+      setLocalError('Please enter all 5 digits');
       return;
     }
 
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const response = await axiosRequest.post('AuthByPhone/verifyPhone', {
+    setLocalError('');
+    
+    const result = await dispatch(
+      confirmPhone({
         phoneNumber: phoneNumber,
         code: verificationCode
-      });
-
-      console.log('Verification successful:', response.data);
+      })
+    );
+    
+    if (confirmPhone.fulfilled.match(result)) {
+      console.log('Verification successful:', result.payload);
       setSuccess(true);
       
-      // После успешной верификации перенаправляем на главную
       setTimeout(() => {
         navigate('/Home');
       }, 2000);
-
-    } catch (error) {
-      console.error('Verification failed:', error);
-      setError(error.response?.data?.message || 'Invalid verification code');
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const handleResendCode = async () => {
-    setIsLoading(true);
-    setError('');
-
-    try {
-      await axiosRequest.post('AuthByPhone/resendCode', {
-        phoneNumber: phoneNumber
-      });
-      
+    const result = await dispatch(resendVerificationCode(phoneNumber));
+    
+    if (resendVerificationCode.fulfilled.match(result)) {
       setTimer(60);
       setCanResend(false);
-      setCode(['', '', '', '', '', '']);
+      setCode(['', '', '', '', '']);
       document.getElementById('code-0').focus();
-      
-    } catch (error) {
-      console.error('Resend failed:', error);
-      setError('Failed to resend code. Please try again.');
-    } finally {
-      setIsLoading(false);
     }
   };
+
+  const displayError = localError || error;
 
   if (success) {
     return (
@@ -125,9 +112,9 @@ const PhoneVerification = () => {
           </p>
         </div>
 
-        {error && (
+        {displayError && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-600 text-sm">{error}</p>
+            <p className="text-red-600 text-sm">{displayError}</p>
           </div>
         )}
 
@@ -149,7 +136,7 @@ const PhoneVerification = () => {
           </div>
 
           <p className="text-center text-gray-600 mb-4">
-            Enter the 6-digit code sent to your phone
+            Enter the 5-digit code sent to your phone
           </p>
 
           <div className="text-center mb-6">
@@ -170,9 +157,9 @@ const PhoneVerification = () => {
 
           <button
             onClick={handleVerify}
-            disabled={isLoading || code.join('').length !== 6}
+            disabled={isLoading || code.join('').length !== 5}
             className={`w-full h-12 bg-gradient-to-r from-red-500 to-pink-500 text-white font-medium rounded-lg transition-all hover:from-red-600 hover:to-pink-600 ${
-              isLoading || code.join('').length !== 6 ? 'opacity-50 cursor-not-allowed' : ''
+              isLoading || code.join('').length !== 5 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
             {isLoading ? (
