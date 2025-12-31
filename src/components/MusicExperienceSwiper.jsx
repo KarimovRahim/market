@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -34,7 +35,7 @@ const MusicExperienceSlider = ({ musicImage }) => {
                 <label className="font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white mt-4 md:mt-6 lg:mt-8 leading-tight">
                   Enhance Your <br className="hidden sm:block" /> Music Experience
                 </label>
-                
+
                 {/* Timer */}
                 <div className="w-full max-w-xs md:max-w-sm flex flex-row justify-between mt-6 md:mt-8 lg:mt-10">
                   {[
@@ -53,18 +54,20 @@ const MusicExperienceSlider = ({ musicImage }) => {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* Button */}
-                <button className="w-full max-w-xs md:w-48 h-12 md:h-14 bg-green-400 hover:bg-green-500 rounded-lg md:rounded-xl font-medium text-base md:text-lg text-gray-900 mt-6 md:mt-8 lg:mt-10 transition-colors">
-                  Buy Now!
-                </button>
+                <Link to={"/Shop"}>
+                  <button className="w-full max-w-xs md:w-48 h-12 md:h-14 bg-green-400 hover:bg-green-500 rounded-lg md:rounded-xl font-medium text-base md:text-lg text-gray-900 mt-6 md:mt-8 lg:mt-10 transition-colors">
+                    View All
+                  </button>
+                </Link>
               </div>
 
               {/* Image */}
               <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <img 
-                  src={musicImage} 
-                  alt="Music Experience" 
+                <img
+                  src={musicImage}
+                  alt="Music Experience"
                   className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain"
                 />
               </div>
@@ -82,7 +85,7 @@ const MusicExperienceSlider = ({ musicImage }) => {
                 <label className="font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white mt-4 md:mt-6 lg:mt-8 leading-tight">
                   Ultimate Sound <br className="hidden sm:block" /> Quality
                 </label>
-                
+
                 {/* Timer */}
                 <div className="w-full max-w-xs md:max-w-sm flex flex-row justify-between mt-6 md:mt-8 lg:mt-10">
                   {[
@@ -101,18 +104,20 @@ const MusicExperienceSlider = ({ musicImage }) => {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* Button */}
-                <button className="w-full max-w-xs md:w-48 h-12 md:h-14 bg-green-400 hover:bg-green-500 rounded-lg md:rounded-xl font-medium text-base md:text-lg text-gray-900 mt-6 md:mt-8 lg:mt-10 transition-colors">
-                  Shop Now
-                </button>
+                <Link to={"/Shop"}>
+                  <button className="w-full max-w-xs md:w-48 h-12 md:h-14 bg-green-400 hover:bg-green-500 rounded-lg md:rounded-xl font-medium text-base md:text-lg text-gray-900 mt-6 md:mt-8 lg:mt-10 transition-colors">
+                    View All
+                  </button>
+                </Link>
               </div>
 
               {/* Image */}
               <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <img 
-                  src={musicImage} 
-                  alt="Premium Audio" 
+                <img
+                  src={musicImage}
+                  alt="Premium Audio"
                   className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain"
                 />
               </div>
@@ -130,7 +135,7 @@ const MusicExperienceSlider = ({ musicImage }) => {
                 <label className="font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white mt-4 md:mt-6 lg:mt-8 leading-tight">
                   Freedom of <br className="hidden sm:block" /> Wireless Sound
                 </label>
-                
+
                 {/* Timer */}
                 <div className="w-full max-w-xs md:max-w-sm flex flex-row justify-between mt-6 md:mt-8 lg:mt-10">
                   {[
@@ -149,18 +154,20 @@ const MusicExperienceSlider = ({ musicImage }) => {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* Button */}
-                <button className="w-full max-w-xs md:w-48 h-12 md:h-14 bg-green-400 hover:bg-green-500 rounded-lg md:rounded-xl font-medium text-base md:text-lg text-gray-900 mt-6 md:mt-8 lg:mt-10 transition-colors">
-                  View All
-                </button>
+                <Link to={"/Shop"}>
+                  <button className="w-full max-w-xs md:w-48 h-12 md:h-14 bg-green-400 hover:bg-green-500 rounded-lg md:rounded-xl font-medium text-base md:text-lg text-gray-900 mt-6 md:mt-8 lg:mt-10 transition-colors">
+                    View All
+                  </button>
+                </Link>
               </div>
 
               {/* Image */}
               <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <img 
-                  src={musicImage} 
-                  alt="Wireless Tech" 
+                <img
+                  src={musicImage}
+                  alt="Wireless Tech"
                   className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain"
                 />
               </div>

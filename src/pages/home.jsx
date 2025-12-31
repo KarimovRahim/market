@@ -1,30 +1,29 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { SiApple } from 'react-icons/si';
-import CountdownTimer from '../components/CountDownTimer.jsx';
+import MusicExperienceSwiper from '../components/MusicExperienceSwiper.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
-import MusicExperienceSwiper from '../components/MusicExperienceSwiper';
+import CountdownTimer from '../components/CountDownTimer.jsx';
 import { products } from '../components/ProductsData.jsx';
+import { Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { SiApple } from 'react-icons/si';
+import { Link } from 'react-router-dom';
+import 'swiper/css/pagination';
+import 'swiper/css';
 
-import img1 from '../assets/img1.jpg'
-import phones from '../assets/phone.png';
-import computer from '../assets/computer.png';
-import watch from '../assets/watch.png';
-import camera from '../assets/camera.png';
 import HeadPhones from '../assets/HeadPhones.png';
+import computer from '../assets/computer.png';
+import camera from '../assets/camera.png';
 import gaming from '../assets/gaming.png';
+import phones from '../assets/phone.png';
+import watch from '../assets/watch.png';
 import music from '../assets/music.png';
-import back from '../assets/back.png';
 import back2 from '../assets/back2.jpg';
-import back3 from '../assets/back3.png';
 import back4 from '../assets/back4.png';
 import icon1 from '../assets/icon1.png';
 import icon2 from '../assets/icon2.png';
 import icon3 from '../assets/icon3.png';
+import back from '../assets/back.png';
+import img1 from '../assets/img1.jpg';
 
 const Home = () => {
   const data = [
@@ -69,9 +68,7 @@ const Home = () => {
 
   return (
     <div className="w-full flex flex-col items-center px-3 sm:px-4 md:px-6">
-      {/* Hero Section */}
       <div className="w-full max-w-6xl flex flex-col lg:flex-row gap-6 md:gap-8 items-start mt-4 md:mt-6 lg:mt-8 mb-8 md:mb-12 lg:mb-16">
-        {/* Sidebar Categories */}
         <div className="w-full lg:w-1/4 bg-white rounded-lg md:rounded-xl shadow-sm p-4 md:p-6 lg:sticky lg:top-6">
           <h3 className="font-semibold text-lg md:text-xl text-gray-900 mb-3 md:mb-4">Categories</h3>
           <div className="flex flex-col gap-2 md:gap-3">
@@ -83,7 +80,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Hero Slider */}
         <div className="w-full lg:w-3/4 bg-black rounded-lg md:rounded-xl overflow-hidden">
           <Swiper
             modules={[Pagination, Autoplay]}
@@ -132,26 +128,23 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Flash Sales Section */}
       <div className="w-full max-w-6xl flex flex-col mt-8 md:mt-12 lg:mt-16">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-2 md:w-3 h-6 md:h-8 bg-red-600 rounded"></div>
           <label className="font-semibold text-sm md:text-base text-red-600">Today's</label>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-6 md:mb-8 lg:mb-12">
+        <div className="flex flex-col p-[40px] sm:flex-row justify-between items-start sm:items-end gap-4 mb-6 md:mb-8 lg:mb-12">
           <label className="font-semibold text-2xl md:text-3xl lg:text-4xl text-gray-900">Flash Sales</label>
           <CountdownTimer />
         </div>
       </div>
 
-      {/* Product Carousel */}
       <div className="w-full bg-gray-50 py-6 md:py-8 lg:py-12">
         <div className="container mx-auto px-3 sm:px-4 md:px-6 max-w-6xl">
           <ProductCarousel />
         </div>
       </div>
 
-      {/* Categories Section */}
       <div className="w-full max-w-6xl flex flex-col mt-8 md:mt-12 lg:mt-16">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-2 md:w-3 h-6 md:h-8 bg-red-600 rounded"></div>
@@ -160,7 +153,6 @@ const Home = () => {
         <label className="font-semibold text-2xl md:text-3xl lg:text-4xl text-gray-900 mt-2 md:mt-4">Browse by Category</label>
       </div>
 
-      {/* Categories Grid */}
       <div className="w-full max-w-6xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 lg:gap-6 mt-6 md:mt-8">
         {data.map((item) => (
           <div 
@@ -179,12 +171,10 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Music Experience */}
       <div className="w-full mt-12 md:mt-16 lg:mt-20 mb-12 md:mb-16 lg:mb-20">
         <MusicExperienceSwiper musicImage={music} />
       </div>
 
-      {/* Featured Products */}
       <div className="w-full max-w-6xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {products.slice(0, 8).map((product) => (
@@ -214,7 +204,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* More Products Button */}
       <div className="text-center mt-6 md:mt-8 lg:mt-10">
         <Link to="/Shop">
           <button className="bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 md:py-3 px-6 md:px-8 rounded-lg transition-colors inline-flex items-center gap-2">
@@ -226,7 +215,6 @@ const Home = () => {
         </Link>
       </div>
 
-      {/* New Arrivals */}
       <div className="w-full max-w-6xl flex flex-col mt-8 md:mt-12 lg:mt-16">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-2 md:w-3 h-6 md:h-8 bg-red-600 rounded"></div>
@@ -235,9 +223,7 @@ const Home = () => {
         <label className="font-semibold text-2xl md:text-3xl lg:text-4xl text-gray-900 mt-2 md:mt-4">New Arrival</label>
       </div>
 
-      {/* New Arrivals Grid */}
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
-        {/* Main Product */}
         <div className="bg-black rounded-lg md:rounded-xl overflow-hidden h-64 md:h-80 lg:h-96 relative"
           style={{
             backgroundImage: `url(${back})`,
@@ -262,9 +248,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Secondary Products */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {/* Women's Collection */}
           <div className="bg-gray-900 rounded-lg md:rounded-xl overflow-hidden h-60 md:h-64 relative"
             style={{
               backgroundImage: `url(${back2})`,
@@ -289,7 +273,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Speakers */}
           <div className="bg-gray-900 rounded-lg md:rounded-xl overflow-hidden h-60 md:h-64 relative"
             style={{
               backgroundImage: `url(${back4})`,
@@ -316,7 +299,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Features Section */}
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16 lg:mt-20 mb-12 md:mb-16 lg:mb-20">
         {[
           { icon: icon1, title: "FREE AND FAST DELIVERY", description: "Free delivery for all orders over $140" },
