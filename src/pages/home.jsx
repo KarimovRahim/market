@@ -133,7 +133,7 @@ const Home = () => {
           <div className="w-2 md:w-3 h-6 md:h-8 bg-red-600 rounded"></div>
           <label className="font-semibold text-sm md:text-base text-red-600">Today's</label>
         </div>
-        <div className="flex flex-col p-[40px] sm:flex-row justify-between items-start sm:items-end gap-4 mb-6 md:mb-8 lg:mb-12">
+        <div className="flex flex-col p-[20px] gap-[40px] sm:flex-row justify-between items-start sm:items-end gap-4 mb-6 md:mb-8 lg:mb-12">
           <label className="font-semibold text-2xl md:text-3xl lg:text-4xl text-gray-900">Flash Sales</label>
           <CountdownTimer />
         </div>
