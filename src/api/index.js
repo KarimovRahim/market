@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosRequest } from '../utils/axiosConfig.js'
 import { saveToken, saveRegistToken, getUserId, getToken } from '../utils/token.js';
 
-// ✅ Получаем токен из localStorage
 const user = getToken();
 const userID = getUserId();
 
@@ -29,7 +28,6 @@ export const registerUser = createAsyncThunk(
 
       console.log('Registration response:', response.data);
 
-      // Сохраняем phoneNumber для верификации
       localStorage.setItem('pendingVerificationPhone', userData.phone);
 
       return { ...response.data, phoneNumber: userData.phone };
@@ -62,7 +60,6 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// ✅ Авторизация
 export const loginUser = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
@@ -76,7 +73,6 @@ export const loginUser = createAsyncThunk(
 
       console.log('Login response:', response.data);
 
-      // Сохраняем токен
       saveToken(response.data);
 
       return response.data;
@@ -103,7 +99,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// ✅ Получение текущего пользователя
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, { rejectWithValue }) => {
@@ -126,7 +121,6 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
-// ✅ Получение всех пользователей (пример)
 export const GetUser = createAsyncThunk(
   'user/getAll',
   async (_, { rejectWithValue }) => {
